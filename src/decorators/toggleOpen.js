@@ -17,6 +17,6 @@ export default (OriginalComponent) => class DecoratedComponent extends ReactComp
   }
 
   getRef = (ref) => {
-  	console.log(ref)
+  	// console.log(ref)
   }
 }

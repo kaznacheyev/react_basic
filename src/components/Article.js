@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 
-class Article extends Component {
+class Article extends PureComponent {
   static propTypes = {
     // article: PropTypes.object.isRequired
     article: PropTypes.shape({
@@ -15,14 +15,12 @@ class Article extends Component {
     toggleOpen: PropTypes.func
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('---', 'updating', this.props.isOpen, nextProps.isOpen)
+/*
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.isOpen !== this.props.isOpen
   }
+*/
 
-  componentWillMount() {
-    console.log('---', 'mounting')
-  }
-  
   render() {
     const {article, isOpen, toggleOpen} = this.props
     return (
@@ -38,12 +36,7 @@ class Article extends Component {
 
   setContainerRef = ref => {
     this.container = ref
-    console.log('---', ref)
-  }
-
-  componentDidMount() {
-    console.log('---', 'mounted')
-
+    // console.log('---', ref)
   }
 
   getBody() {
@@ -58,7 +51,7 @@ class Article extends Component {
   }
 
   setCommentsRef = ref => {
-    // console.log('---', findDOMNode(ref))
+    // console.log('---', ref)
   }
 }
 
