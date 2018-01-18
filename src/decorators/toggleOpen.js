@@ -6,7 +6,7 @@ export default (OriginalComponent) => class DecoratedComponent extends ReactComp
 	}
 
 	render() {
-		return <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen} />
+		return <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen} ref = {this.getRef} />
 	}
 
 	toggleOpen = (ev) => {
@@ -14,5 +14,9 @@ export default (OriginalComponent) => class DecoratedComponent extends ReactComp
     this.setState({
       isOpen: !this.state.isOpen
     })
+  }
+
+  getRef = (ref) => {
+  	console.log(ref)
   }
 }
