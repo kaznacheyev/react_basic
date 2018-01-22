@@ -11,12 +11,12 @@ export default (OriginalComponent) => class DecoratedComponent extends ReactComp
 
 	toggleOpen = (ev) => {
 		ev.preventDefault()
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
+		this.setState({
+			isOpen: !this.state.isOpen
+		})
+	}
 
-  getRef = (ref) => {
-  	// console.log(ref)
-  }
+	getRef = (ref) => {
+		// console.log(ref)
+	}
 }
