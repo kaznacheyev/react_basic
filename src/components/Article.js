@@ -2,6 +2,8 @@ import React, {Component, PureComponent} from 'react'
 import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
+import { CSSTransitionGroup } from 'react-transition-group'
+import './article.css'
 
 class Article extends PureComponent {
 	static propTypes = {
@@ -13,6 +15,10 @@ class Article extends PureComponent {
 		}).isRequired,
 		isOpen: PropTypes.bool,
 		toggleOpen: PropTypes.func
+	}
+
+	state = {
+		updateIndex: 0
 	}
 
 /*
@@ -29,7 +35,16 @@ class Article extends PureComponent {
 				<button onClick = {toggleOpen}>
 					{isOpen ? 'close' : 'open'}
 				</button>
-				{this.getBody()}
+				<CSSTransitionGroup
+					transitionName="article"
+					transitionAppear
+					transitionEnterTimeout = {300}
+					transitionLeaveTimeout = {500}
+					transitionAppearTimeout = {500}
+					component = 'div'
+				>
+					{this.getBody()}
+				</CSSTransitionGroup>
 			</div>
 		)
 	}
@@ -46,7 +61,8 @@ class Article extends PureComponent {
 		return (
 			<section>
 				{article.text}
-				<CommentList comments = {article.comments} ref = {this.setCommentsRef} />
+				<button onClick = {() => this.setState({updateIndex: this.state.updateIndex + 1})}>update</button>
+				<CommentList comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.updateIndex} />
 			</section>
 		)
 	}
