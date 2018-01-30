@@ -1,8 +1,10 @@
 import React, {Component, PureComponent} from 'react'
 import {findDOMNode} from 'react-dom'
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import CommentList from '../CommentList'
 import { CSSTransitionGroup } from 'react-transition-group'
+import {deleteArticle} from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
@@ -35,6 +37,7 @@ class Article extends PureComponent {
 				<button onClick = {toggleOpen}>
 					{isOpen ? 'close' : 'open'}
 				</button>
+				<button onClick = {this.handleDelete}>delete me</button>
 				<CSSTransitionGroup
 					transitionName="article"
 					transitionAppear
@@ -47,6 +50,12 @@ class Article extends PureComponent {
 				</CSSTransitionGroup>
 			</div>
 		)
+	}
+
+	handleDelete = () => {
+		const {deleteArticle, article} = this.props
+		deleteArticle(article.id)
+		console.log('---', 'deleting')
 	}
 
 	setContainerRef = ref => {
@@ -72,4 +81,4 @@ class Article extends PureComponent {
 	}
 }
 
-export default Article
+export default connect(null, { deleteArticle })(Article)
