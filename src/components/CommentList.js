@@ -17,16 +17,14 @@ class CommentList extends Component {
 		const text = isOpen ? 'hide comments' : 'show comments'
 		return (
 			<div>
-				<button onClick = {toggleOpen}>
-					{text}
-				</button>
+				<button onClick = {toggleOpen}>{text}</button>
 				{this.getBody()}
 			</div>
 		)
 	}
 
 	getBody() {
-		const {comments, isOpen} = this.props
+		const {article: { comments = [], id }, isOpen} = this.props
 		if (!isOpen) return null
 
 		const body = comments.length ? (
@@ -38,7 +36,7 @@ class CommentList extends Component {
 		return (
 			<div>
 				{body}
-				<CommentForm />
+				<CommentForm articleId = {id} />
 			</div>
 		)
 	}

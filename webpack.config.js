@@ -10,16 +10,22 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/static/'
     },
+    devServer: {
+        proxy: [{
+            path: '/api/',
+            target: 'http://localhost:3001'
+        }]
+    },
     module: {
-        rules: [
+        loaders: [
             {
                 test: /\.js/,
-                use: ['babel-loader'],
+                loaders: ['babel-loader'],
                 include: path.join(__dirname, 'src')
             },
             {
                 test: /\.css/,
-                use: ['style-loader', 'css-loader']
+                loaders: ['style-loader', 'css-loader'],
             }
         ]
     }
